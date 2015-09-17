@@ -20,6 +20,7 @@ var next = function () {
 		} else {
 			console.log ("Error: Next Post Doesn't Exist");
 			speak("Error: Next Post Doesn't Exist");
+			return;
 		}
 		
 		if (post.children != undefined && post.children.length > 0 && post.children[0].dataset != undefined) { 
