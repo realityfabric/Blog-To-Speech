@@ -20,9 +20,16 @@ var next = function () {
 			holder = post.children[0].dataset.type; 
 		} 
 	} 
-	
-	post_content = $("#" + post.children[0].id + " > .post_wrapper > .post_content > .post_content_inner > .post_container > .post_body").textContent; 
-	
+
+	if ($("#" + post.children[0].id + " > .post_wrapper > .post_content > .post_content_inner > .post_container > .post_body") != undefined) {
+		post_content = $("#" + post.children[0].id + " > .post_wrapper > .post_content > .post_content_inner > .post_container > .post_body").textContent; 
+	}
+	else if ($("#" + post.children[0].id + " > .post_wrapper > .post_content > .post_content_inner > .post_container > .reblog-list > .reblog-list-item > .reblog-content") != undefined) {
+		post_content = $("#" + post.children[0].id + " > .post_wrapper > .post_content > .post_content_inner > .post_container > .reblog-list > .reblog-list-item > .reblog-content").textContent;
+	}
+	else {
+		post_content = "undefined content";
+	}
 	speak(post_content); 
 } 
 
