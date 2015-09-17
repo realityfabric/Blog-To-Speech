@@ -11,11 +11,16 @@ var cancel = function () {
 } 
 
 var next = function () { 
-	if (post === undefined || post === null) { speak("Error: Post Doesn't Exist"); return; } //it's not going to work
+	if (post === undefined || post === null) { console.log ("Error: Next Post Doesn't Exist"); speak("Error: Post Doesn't Exist"); return; } //it's not going to work
 	var holder = undefined; 
 	
 	while (holder != "regular") { 
-		post = post.nextSibling; 
+		if (post.nextSibling != null || post.nextSibling != undefined) {
+			post = post.nextSibling; 
+		} else {
+			console.log ("Error: Next Post Doesn't Exist");
+			speak("Error: Next Post Doesn't Exist");
+		}
 		
 		if (post.children != undefined && post.children.length > 0 && post.children[0].dataset != undefined) { 
 			holder = post.children[0].dataset.type; 
