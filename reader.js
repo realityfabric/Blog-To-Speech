@@ -30,20 +30,38 @@ var next = function () {
 			holder = post.children[0].dataset.type; 
 		} 
 	} 
-
-    if ($("#" + post.children[0].id + " > .post_wrapper > .post_header > .post_info") != null && $("#" + post.children[0].id + " > .post_wrapper > .post_header > .post_info") != undefined) {
-			speak($("#" + post.children[0].id + " > .post_wrapper > .post_header > .post_info").textContent);
-	}
 	
-	if ($("#" + post.children[0].id + " > .post_wrapper > .post_content > .post_content_inner > .post_container > .post_body") != undefined) {
-		speak($("#" + post.children[0].id + " > .post_wrapper > .post_content > .post_content_inner > .post_container > .post_body").textContent); 
+	switch (holder) {
+		case "regular":
+			if ($("#" + post.children[0].id + " > .post_wrapper > .post_header > .post_info") != null && $("#" + post.children[0].id + " > .post_wrapper > .post_header > .post_info") != undefined) {
+				speak($("#" + post.children[0].id + " > .post_wrapper > .post_header > .post_info").textContent);
+			}
+			
+			if ($("#" + post.children[0].id + " > .post_wrapper > .post_content > .post_content_inner > .post_container > .post_body") != undefined) {
+				speak($("#" + post.children[0].id + " > .post_wrapper > .post_content > .post_content_inner > .post_container > .post_body").textContent); 
+			}
+			else if ($("#" + post.children[0].id + " > .post_wrapper > .post_content > .post_content_inner > .post_container > .reblog-list > .reblog-list-item > .reblog-content") != undefined) {
+				speak($("#" + post.children[0].id + " > .post_wrapper > .post_content > .post_content_inner > .post_container > .reblog-list > .reblog-list-item > .reblog-content").textContent);
+			}
+			else {
+				speak("undefined content");
+			}
+		break;
+		
+		case "photo":
+			if ($("#" + post.children[0].id + " > .post_wrapper > .post_header > .post_info") != null && $("#" + post.children[0].id + " > .post_wrapper > .post_header > .post_info") != undefined) {
+				speak($("#" + post.children[0].id + " > .post_wrapper > .post_header > .post_info").textContent);
+			}
+			
+			speak(holder + " post. This post type only has partial functionality.");
+		break;
+		
+		default:
+			speak(holder + " post. Functionality not yet added for this post type.");
+		break;
 	}
-	else if ($("#" + post.children[0].id + " > .post_wrapper > .post_content > .post_content_inner > .post_container > .reblog-list > .reblog-list-item > .reblog-content") != undefined) {
-		speak($("#" + post.children[0].id + " > .post_wrapper > .post_content > .post_content_inner > .post_container > .reblog-list > .reblog-list-item > .reblog-content").textContent);
-	}
-	else {
-		speak("undefined content");
-	}
+
+    
 } 
 
 var init = function () { 
