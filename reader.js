@@ -1,5 +1,5 @@
 var post = $(".post_container");
-var post_content; 
+var post_content = ""; 
 
 var speak = function (msg) { 
 	var speech = new SpeechSynthesisUtterance(msg); 
@@ -14,8 +14,11 @@ var next = function () {
 	if (post === undefined || post === null) { console.log ("Error: Next Post Doesn't Exist"); speak("Error: Post Doesn't Exist"); return; } //it's not going to work
 	var holder = undefined; 
 	
-	while (holder != "regular") { 
+	post_content = "";
+	
+	while (holder != "regular" && holder != "photo") { 
 		if (post.nextSibling != null || post.nextSibling != undefined) {
+            console.log(holder);
 			post = post.nextSibling; 
 		} else {
 			console.log ("Error: Next Post Doesn't Exist");
@@ -28,16 +31,19 @@ var next = function () {
 		} 
 	} 
 
+    if ($("#" + posttest.children[0].id + " > .post_wrapper > .post_header > .post_info") != null && $("#" + posttest.children[0].id + " > .post_wrapper > .post_header > .post_info") != undefined) {
+			speak($("#" + posttest.children[0].id + " > .post_wrapper > .post_header > .post_info").textContent);
+	}
+	
 	if ($("#" + post.children[0].id + " > .post_wrapper > .post_content > .post_content_inner > .post_container > .post_body") != undefined) {
-		post_content = $("#" + post.children[0].id + " > .post_wrapper > .post_content > .post_content_inner > .post_container > .post_body").textContent; 
+		speak($("#" + post.children[0].id + " > .post_wrapper > .post_content > .post_content_inner > .post_container > .post_body").textContent); 
 	}
 	else if ($("#" + post.children[0].id + " > .post_wrapper > .post_content > .post_content_inner > .post_container > .reblog-list > .reblog-list-item > .reblog-content") != undefined) {
-		post_content = $("#" + post.children[0].id + " > .post_wrapper > .post_content > .post_content_inner > .post_container > .reblog-list > .reblog-list-item > .reblog-content").textContent;
+		speak($("#" + post.children[0].id + " > .post_wrapper > .post_content > .post_content_inner > .post_container > .reblog-list > .reblog-list-item > .reblog-content").textContent);
 	}
 	else {
-		post_content = "undefined content";
+		speak("undefined content");
 	}
-	speak(post_content); 
 } 
 
 var init = function () { 
