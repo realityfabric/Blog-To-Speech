@@ -11,7 +11,12 @@ var cancel = function () {
 } 
 
 var next = function () { 
-	if (post === undefined || post === null) { console.log ("Error: Next Post Doesn't Exist"); speak("Error: Post Doesn't Exist"); return; } //it's not going to work
+	if (post === undefined || post === null) {  //it's not going to work
+		console.log ("Error: Next Post Doesn't Exist"); 
+		speak("Error: Post Doesn't Exist"); 
+		return; 
+	}
+	
 	var holder = undefined; 
 	
 	post_content = "";
@@ -40,8 +45,35 @@ var next = function () {
 			if ($("#" + post.children[0].id + " > .post_wrapper > .post_content > .post_content_inner > .post_container > .post_body") != undefined) {
 				speak($("#" + post.children[0].id + " > .post_wrapper > .post_content > .post_content_inner > .post_container > .post_body").textContent); 
 			}
-			else if ($("#" + post.children[0].id + " > .post_wrapper > .post_content > .post_content_inner > .post_container > .reblog-list > .reblog-list-item > .reblog-content") != undefined) {
-				speak($("#" + post.children[0].id + " > .post_wrapper > .post_content > .post_content_inner > .post_container > .reblog-list > .reblog-list-item > .reblog-content").textContent);
+			else if ($("#" + post.children[0].id + " > .post_wrapper > .post_content > .post_content_inner > .post_container > .reblog-list > .reblog-list-item") != undefined) {
+				if ($("#" + post.children[0].id + " > .post_wrapper > .post_content > .post_content_inner > .post_container > .reblog-list > .reblog-list-item > .reblog-header")) {
+					speak($("#" + post.children[0].id + " > .post_wrapper > .post_content > .post_content_inner > .post_container > .reblog-list > .reblog-list-item > .reblog-header").textContent);
+				}
+				
+				if ($("#" + post.children[0].id + " > .post_wrapper > .post_content > .post_content_inner > .post_container > .reblog-list > .reblog-list-item > .reblog-content")) {
+					speak($("#" + post.children[0].id + " > .post_wrapper > .post_content > .post_content_inner > .post_container > .reblog-list > .reblog-list-item > .reblog-content").textContent);
+				}
+									
+				var reblog_list_item = $("#" + post.children[0].id + " > .post_wrapper > .post_content > .post_content_inner > .post_container > .reblog-list > .reblog-list-item");
+				
+				while (reblog_list_item.nextSibling != null && reblog_list_item.nextSibling != undefined) {
+					reblog_list_item = reblog_list_item.nextSibling;
+					
+					if (reblog_list_item.children != null && reblog_list_item.children != undefined) {
+						speak(reblog_list_item.children[0].textContent);
+						speak(reblog_list_item.children[1].textContent);
+					}
+				}
+				
+				if ($("#" + post.children[0].id + " > .post_wrapper > .post_content > .post_content_inner > .post_container > .reblog-list-item") != undefined && $("#" + post.children[0].id + " > .post_wrapper > .post_content > .post_content_inner > .post_container > .reblog-list-item") != null) {
+					if ($("#" + post.children[0].id + " > .post_wrapper > .post_content > .post_content_inner > .post_container > .reblog-list-item > .reblog-header") != null && $("#" + post.children[0].id + " > .post_wrapper > .post_content > .post_content_inner > .post_container > .reblog-list-item > .reblog-header") != undefined) {
+						speak($("#" + post.children[0].id + " > .post_wrapper > .post_content > .post_content_inner > .post_container > .reblog-list-item > .reblog-header").textContent);
+					}
+					
+					if ($("#" + post.children[0].id + " > .post_wrapper > .post_content > .post_content_inner > .post_container > .reblog-list-item > .reblog-content") != null && $("#" + post.children[0].id + " > .post_wrapper > .post_content > .post_content_inner > .post_container > .reblog-list-item > .reblog-content") != undefined) {
+						speak($("#" + post.children[0].id + " > .post_wrapper > .post_content > .post_content_inner > .post_container > .reblog-list-item > .reblog-content").textContent);
+					}
+				}
 			}
 			else {
 				speak("undefined content");
@@ -60,8 +92,6 @@ var next = function () {
 			speak(holder + " post. Functionality not yet added for this post type.");
 		break;
 	}
-
-    
 } 
 
 var init = function () { 
