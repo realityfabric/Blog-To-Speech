@@ -2,8 +2,21 @@ var post = $(".post_container");
 var post_content = ""; 
 
 var speak = function (msg) { 
-	var speech = new SpeechSynthesisUtterance(msg); 
-	speechSynthesis.speak(speech); 
+	var msgarr = [];
+	if (msg.length < 100) {
+		msgarr.push(msg);
+	} else {
+		while (msg.length > 100) { //this ... works ... but it cuts words in half, do better
+			msgarr.push(msg.slice(0,99));
+			msg = msg.slice (100);
+		}
+	}
+	
+	for (var i = 0; i < msgarr.length; i++) {
+		var speech = new SpeechSynthesisUtterance(msgarr[i]); 
+		speechSynthesis.speak(speech); 
+	}
+	 
 } 
 
 var cancel = function () { 
