@@ -31,8 +31,8 @@ var next = function () {
 		} 
 	} 
 
-    if ($("#" + post.children[0].id + " > .post_wrapper > .post_header > .post_info") != null && $("#" + posttest.children[0].id + " > .post_wrapper > .post_header > .post_info") != undefined) {
-			speak($("#" + posttest.children[0].id + " > .post_wrapper > .post_header > .post_info").textContent);
+    if ($("#" + post.children[0].id + " > .post_wrapper > .post_header > .post_info") != null && $("#" + post.children[0].id + " > .post_wrapper > .post_header > .post_info") != undefined) {
+			speak($("#" + post.children[0].id + " > .post_wrapper > .post_header > .post_info").textContent);
 	}
 	
 	if ($("#" + post.children[0].id + " > .post_wrapper > .post_content > .post_content_inner > .post_container > .post_body") != undefined) {
