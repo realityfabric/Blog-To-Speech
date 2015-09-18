@@ -8,8 +8,9 @@ var speak = function (msg) {
 	} else {
 		while (msg.length > 100) { //this ... works ... but it cuts words in half, do better
 			msgarr.push(msg.slice(0,99));
-			msg = msg.slice (100);
+			msg = msg.slice (99);
 		}
+		msgarr.push(msg);
 	}
 	
 	for (var i = 0; i < msgarr.length; i++) {
