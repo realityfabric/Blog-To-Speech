@@ -31,7 +31,7 @@ var next = function () {
 		} 
 	} 
 
-    if ($("#" + posttest.children[0].id + " > .post_wrapper > .post_header > .post_info") != null && $("#" + posttest.children[0].id + " > .post_wrapper > .post_header > .post_info") != undefined) {
+    if ($("#" + post.children[0].id + " > .post_wrapper > .post_header > .post_info") != null && $("#" + posttest.children[0].id + " > .post_wrapper > .post_header > .post_info") != undefined) {
 			speak($("#" + posttest.children[0].id + " > .post_wrapper > .post_header > .post_info").textContent);
 	}
 	
