@@ -34,35 +34,10 @@ var speak = function (msg) {
 
 var cancel = function () { 
 	speechSynthesis.cancel(); 
-} 
+}
 
-var next = function () { 
-	if (post === undefined || post === null) {  //it's not going to work
-		console.log ("Error: Next Post Doesn't Exist"); 
-		speak("Error: Post Doesn't Exist"); 
-		return; 
-	}
-	
-	var holder = undefined; 
-	
-	post_content = "";
-	
-	while (holder != "regular" && holder != "photo") { 
-		if (post.nextSibling != null || post.nextSibling != undefined) {
-            console.log(holder);
-			post = post.nextSibling; 
-		} else {
-			console.log ("Error: Next Post Doesn't Exist");
-			speak("Error: Next Post Doesn't Exist");
-			return;
-		}
-		
-		if (post.children != undefined && post.children.length > 0 && post.children[0].dataset != undefined) { 
-			holder = post.children[0].dataset.type; 
-		} 
-	} 
-	
-	switch (holder) {
+var read = function (post, type) {
+	switch (type) {
 		case "regular":
 			if ($("#" + post.children[0].id + " > .post_wrapper > .post_header > .post_info") != null && $("#" + post.children[0].id + " > .post_wrapper > .post_header > .post_info") != undefined) {
 				speak($("#" + post.children[0].id + " > .post_wrapper > .post_header > .post_info").textContent);
@@ -111,13 +86,42 @@ var next = function () {
 				speak($("#" + post.children[0].id + " > .post_wrapper > .post_header > .post_info").textContent);
 			}
 			
-			speak(holder + " post. This post type only has partial functionality.");
+			speak(type + " post. This post type only has partial functionality.");
 		break;
 		
 		default:
-			speak(holder + " post. Functionality not yet added for this post type.");
+			speak(type + " post. Functionality not yet added for this post type.");
 		break;
 	}
+}
+
+var next = function () { 
+	if (post === undefined || post === null) {  //it's not going to work
+		console.log ("Error: Next Post Doesn't Exist"); 
+		speak("Error: Post Doesn't Exist"); 
+		return; 
+	}
+	
+	var holder = undefined; 
+	
+	post_content = "";
+	
+	while (holder != "regular" && holder != "photo") { 
+		if (post.nextSibling != null || post.nextSibling != undefined) {
+            console.log(holder);
+			post = post.nextSibling; 
+		} else {
+			console.log ("Error: Next Post Doesn't Exist");
+			speak("Error: Next Post Doesn't Exist");
+			return;
+		}
+		
+		if (post.children != undefined && post.children.length > 0 && post.children[0].dataset != undefined) { 
+			holder = post.children[0].dataset.type; 
+		} 
+	}
+	
+	read (post, holder);
 } 
 
 var init = function () { 
