@@ -199,8 +199,8 @@ var next = function () {
 	
 	post_content = "";
 	
-	//while (holder != "regular" && holder != "photo" && holder != "photoset") { 
-	while (holder != "photoset") {
+	while (holder != "regular" && holder != "photo" && holder != "photoset") { 
+	//while (holder != "photoset") {
 		if (post.nextSibling != null || post.nextSibling != undefined) {
             console.log(holder);
 			post = post.nextSibling; 
