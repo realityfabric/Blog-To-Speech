@@ -184,7 +184,7 @@ var read = function (post, type) {
 		break;
 	}
 	
-	var current_tag = $("#" + post.children[0].id + " > .post_wrapper > .post_tags > .post_tags_inner > .post_tag");
+	var current_tag = $("#" + post.children[0].id + " .post_tag"); // + " > .post_wrapper > .post_tags > .post_tags_inner > .post_tag"
 	while (current_tag != undefined && current_tag != null) {
 		speak(current_tag.textContent);
 		
