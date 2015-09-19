@@ -134,6 +134,47 @@ var read = function (post, type) {
 			}
 		break;
 		
+		case "photoset":
+			if ($("#" + post.children[0].id + " > .post_wrapper > .post_header > .post_info") != null && $("#" + post.children[0].id + " > .post_wrapper > .post_header > .post_info") != undefined) {
+				speak($("#" + post.children[0].id + " > .post_wrapper > .post_header > .post_info").textContent);
+			}
+			
+			if ($("#" + post.children[0].id + " > .post_wrapper > .post_content > .post_content_inner > .post_body") != null && $("#" + post.children[0].id + " > .post_wrapper > .post_content > .post_content_inner > .post_body") != undefined) {
+				speak($("#" + post.children[0].id + " > .post_wrapper > .post_content > .post_content_inner > .post_body").textContent);
+			}
+			
+			if ($("#" + post.children[0].id + " > .post_wrapper > .post_content > .post_content_inner >  .reblog-list > .reblog-list-item") != undefined) {
+				if ($("#" + post.children[0].id + " > .post_wrapper > .post_content > .post_content_inner > .reblog-list > .reblog-list-item > .reblog-header")) {
+					speak($("#" + post.children[0].id + " > .post_wrapper > .post_content > .post_content_inner > .reblog-list > .reblog-list-item > .reblog-header").textContent);
+				}
+				
+				if ($("#" + post.children[0].id + " > .post_wrapper > .post_content > .post_content_inner > .reblog-list > .reblog-list-item > .reblog-content")) {
+					speak($("#" + post.children[0].id + " > .post_wrapper > .post_content > .post_content_inner > .reblog-list > .reblog-list-item > .reblog-content").textContent);
+				}
+									
+				var reblog_list_item = $("#" + post.children[0].id + " > .post_wrapper > .post_content > .post_content_inner > .reblog-list > .reblog-list-item");
+				
+				while (reblog_list_item.nextSibling != null && reblog_list_item.nextSibling != undefined) {
+					reblog_list_item = reblog_list_item.nextSibling;
+					
+					if (reblog_list_item.children != null && reblog_list_item.children != undefined) {
+						speak(reblog_list_item.children[0].textContent);
+						speak(reblog_list_item.children[1].textContent);
+					}
+				}
+				
+				if ($("#" + post.children[0].id + " > .post_wrapper > .post_content > .post_content_inner > .reblog-list-item") != undefined && $("#" + post.children[0].id + " > .post_wrapper > .post_content .post_content_inner > .post_container > .reblog-list-item") != null) {
+					if ($("#" + post.children[0].id + " > .post_wrapper > .post_content > .post_content_inner > .reblog-list-item > .reblog-header") != null && $("#" + post.children[0].id + " > .post_wrapper > .post_content > .post_content_inner > .post_container > .reblog-list-item > .reblog-header") != undefined) {
+						speak($("#" + post.children[0].id + " > .post_wrapper > .post_content > .post_content_inner > .reblog-list-item > .reblog-header").textContent);
+					}
+					
+					if ($("#" + post.children[0].id + " > .post_wrapper > .post_content > .post_content_inner > .reblog-list-item > .reblog-content") != null && $("#" + post.children[0].id + " > .post_wrapper > .post_content > .post_content_inner > .reblog-list-item > .reblog-content") != undefined) {
+						speak($("#" + post.children[0].id + " > .post_wrapper > .post_content > .post_content_inner > .reblog-list-item > .reblog-content").textContent);
+					}
+				}
+			}
+		break;
+		
 		default:
 			speak(type + " post. Functionality not yet added for this post type.");
 		break;
@@ -158,7 +199,8 @@ var next = function () {
 	
 	post_content = "";
 	
-	while (holder != "regular" && holder != "photo" && holder != "photoset") { 
+	//while (holder != "regular" && holder != "photo" && holder != "photoset") { 
+	while (holder != "photoset") {
 		if (post.nextSibling != null || post.nextSibling != undefined) {
             console.log(holder);
 			post = post.nextSibling; 
