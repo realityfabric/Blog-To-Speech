@@ -2,31 +2,29 @@ var post = $(".post_container");
 var post_content = ""; 
 
 var speak = function (msg) { 
+	var max_length = 100;
 	var msgarr = [],
 		t_msgarr = [],
 		t_msg = "";
 		
-	if (msg.length < 100) {
-		msgarr.push(msg);
-	} else {
-		while (msg.length > 100) { // i changed the way it slices posts up but it still has some problems
-			t_msg = "";
-			t_msgarr = msg.slice(0,99).split(" ");
-			
-			for (var i = 0; i < t_msgarr.length; i++) { //gotta be a better way to do this
-				if (t_msg.length + t_msgarr[i].length < 100) {
-					t_msg += t_msgarr[i] + " ";
-				} else {
-					i = t_msgarr.length; //stops loop from going again
-				}
+	while (msg.length > max_length) { 
+		t_msg = "";
+		t_msgarr = msg.split(" ");
+		
+		for (var i = 0; i < t_msgarr.length; i++) { //gotta be a better way to do this
+			if (t_msg.length + t_msgarr[i].length < 100) {
+				t_msg += t_msgarr[i] + " ";
+			} else {
+				i = t_msgarr.length; //stops loop from going again
 			}
-			
-			msgarr.push(t_msg);
-			msg = msg.slice (t_msg.length - 1); //the math is off on this because msg and t_msg are different
 		}
-		msgarr.push(msg);
-	}
+		
+		msgarr.push(t_msg);
+		msg = msg.slice (t_msg.length - 1); 
+	} 
 	
+	msgarr.push(msg);
+			
 	for (var i = 0; i < msgarr.length; i++) {
 		var speech = new SpeechSynthesisUtterance(msgarr[i]); 
 		speechSynthesis.speak(speech); 
