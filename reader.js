@@ -108,8 +108,11 @@ var read = function (post, type) {
 		break;
 	}
 	
-	if ($("#" + post.children[0].id + " > .post_wrapper > .post_tags > .post_tags_inner") != undefined) {
-		speak($("#" + post.children[0].id + " > .post_wrapper > .post_tags > .post_tags_inner").textContent); 
+	var current_tag = $("#" + post.children[0].id + " > .post_wrapper > .post_tags > .post_tags_inner > .post_tag");
+	while (current_tag != undefined && current_tag != null) {
+		speak(current_tag.textContent);
+		
+		current_tag = current_tag.nextSibling; 
 	}
 }
 
