@@ -1,5 +1,10 @@
 var post = $(".post_container");
 var post_content = ""; 
+var read_post_type = true;
+
+var toggle_read_post_type = function () {
+	read_post_type = !read_post_type;
+}
 
 var speak = function (msg) { 
 	var MAX_LENGTH = 300;
@@ -37,6 +42,9 @@ var cancel = function () {
 }
 
 var read = function (post, type) {
+	if (read_post_type) {
+		speak(type + " post:");
+	}
 	switch (type) {
 		case "regular":
 			if ($("#" + post.children[0].id + " > .post_wrapper > .post_header > .post_info") != null && $("#" + post.children[0].id + " > .post_wrapper > .post_header > .post_info") != undefined) {
@@ -83,10 +91,6 @@ var read = function (post, type) {
 				speak("undefined content");
 			}
 			
-			if ($("#" + post.children[0].id + " > .post_wrapper > .post_tags > .post_tags_inner") != undefined) {
-				speak($("#" + post.children[0].id + " > .post_wrapper > .post_tags > .post_tags_inner").textContent); 
-			}
-			
 		break;
 		
 		case "photo":
@@ -94,12 +98,18 @@ var read = function (post, type) {
 				speak($("#" + post.children[0].id + " > .post_wrapper > .post_header > .post_info").textContent);
 			}
 			
-			speak(type + " post. This post type only has partial functionality.");
+			if ($("#" + post.children[0].id + " > .post_wrapper > .post_content > .post_content_inner > .post_body") != null && $("#" + post.children[0].id + " > .post_wrapper > .post_content > .post_content_inner > .post_body") != undefined) {
+				speak($("#" + post.children[0].id + " > .post_wrapper > .post_content > .post_content_inner > .post_body").textContent);
+			}
 		break;
 		
 		default:
 			speak(type + " post. Functionality not yet added for this post type.");
 		break;
+	}
+	
+	if ($("#" + post.children[0].id + " > .post_wrapper > .post_tags > .post_tags_inner") != undefined) {
+		speak($("#" + post.children[0].id + " > .post_wrapper > .post_tags > .post_tags_inner").textContent); 
 	}
 }
 
