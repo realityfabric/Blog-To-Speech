@@ -43,6 +43,9 @@ var read = function (post, type) {
 				speak($("#" + post.children[0].id + " > .post_wrapper > .post_header > .post_info").textContent);
 			}
 			
+			if ($("#" + post.children[0].id + " > .post_wrapper > .post_content > .post_content_inner > .post_container > .post_title") != undefined) {
+				speak($("#" + post.children[0].id + " > .post_wrapper > .post_content > .post_content_inner > .post_container > .post_title").textContent); 
+			}
 			if ($("#" + post.children[0].id + " > .post_wrapper > .post_content > .post_content_inner > .post_container > .post_body") != undefined) {
 				speak($("#" + post.children[0].id + " > .post_wrapper > .post_content > .post_content_inner > .post_container > .post_body").textContent); 
 			}
@@ -79,6 +82,11 @@ var read = function (post, type) {
 			else {
 				speak("undefined content");
 			}
+			
+			if ($("#" + post.children[0].id + " > .post_wrapper > .post_tags > .post_tags_inner") != undefined) {
+				speak($("#" + post.children[0].id + " > .post_wrapper > .post_tags > .post_tags_inner").textContent); 
+			}
+			
 		break;
 		
 		case "photo":
