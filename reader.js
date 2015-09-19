@@ -2,17 +2,17 @@ var post = $(".post_container");
 var post_content = ""; 
 
 var speak = function (msg) { 
-	var max_length = 100;
+	var MAX_LENGTH = 300;
 	var msgarr = [],
 		t_msgarr = [],
 		t_msg = "";
 		
-	while (msg.length > max_length) { 
+	while (msg.length > MAX_LENGTH) { 
 		t_msg = "";
 		t_msgarr = msg.split(" ");
 		
 		for (var i = 0; i < t_msgarr.length; i++) { //gotta be a better way to do this
-			if (t_msg.length + t_msgarr[i].length < 100) {
+			if (t_msg.length + t_msgarr[i].length < MAX_LENGTH) {
 				t_msg += t_msgarr[i] + " ";
 			} else {
 				i = t_msgarr.length; //stops loop from going again
