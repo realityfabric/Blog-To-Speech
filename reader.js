@@ -194,6 +194,7 @@ var read = function (post, type) {
 					speak($("#" + post.children[0].id + " .post_body > .answer").textContent);
 				}
 			}
+		break;		
 		
 		default:
 			speak(type + " post. Functionality not yet added for this post type.");
