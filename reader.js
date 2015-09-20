@@ -7,6 +7,7 @@ var voices = speechSynthesis.getVoices();
 var voice = voices[0]; //default voice
 
 var switchVoice = function (index) {
+	voices = speechSynthesis.getVoices(); //added this because sometimes the initial definition assigns an empty array
 	if (index < 0 || index >= voices.length) {
 		console.log ("index invalid");
 	} else {
@@ -17,6 +18,10 @@ var switchVoice = function (index) {
 
 var toggle_read_post_type = function () {
 	read_post_type = !read_post_type;
+}
+
+var playMedia = function () {
+	// TODO: make it so that audio and video posts can be played
 }
 
 var speak = function (msg) { 
@@ -263,3 +268,9 @@ var init = function () {
 } 
 
 init();
+
+//Facebook
+
+var fbposts = $(".userContentWrapper");
+var fbpost_headers = $(".userContentWrapper ._5pbw");
+var fbpost_content = $(".userContentWrapper .userContent");
