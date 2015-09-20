@@ -1,4 +1,7 @@
 var post = $(".post_container");
+var postObj = {
+		// TODO: initializer function
+	};
 var post_type = undefined;
 var post_content = ""; 
 var read_post_type = true;
@@ -63,57 +66,148 @@ var cancel = function () {
 	speechSynthesis.cancel(); 
 }
 
+//[username] reblogged [username]
+var post_header = function (post) {
+	postObj.post_header = $("#" + post.children[0].id + " > .post_wrapper > .post_header > .post_info");
+	return $("#" + post.children[0].id + " > .post_wrapper > .post_header > .post_info");
+}
+
+//username of person who made an addition
+var rl_reblog_header = function (post) {
+	postObj.reblog_header = $("#" + post.children[0].id + " > .post_wrapper > .post_content > .post_content_inner > .post_container > .reblog-list > .reblog-list-item > .reblog-header");
+	return $("#" + post.children[0].id + " > .post_wrapper > .post_content > .post_content_inner > .post_container > .reblog-list > .reblog-list-item > .reblog-header");
+}
+
+//username of a person who made an addition
+var reblog_header = function (post) {
+	return $("#" + post.children[0].id + " > .post_wrapper > .post_content > .post_content_inner > .post_container > .reblog-list-item > .reblog-header");
+}
+
+//title of a post that has not been reblogged
+var post_title = function (post) {
+	return $("#" + post.children[0].id + " > .post_wrapper > .post_content > .post_content_inner > .post_container > .post_title");
+}
+
+//body of a post that has not been reblogged
+var post_body = function (post) {
+	return $("#" + post.children[0].id + " .post_body");
+}
+
+//a segment of a post containing an entire addition (or the op)
+var rl_reblog_list_item = function (post) {
+	return $("#" + post.children[0].id + " > .post_wrapper > .post_content > .post_content_inner > .post_container > .reblog-list > .reblog-list-item");
+}
+
+//a segment of a post containing an entire addition (or the op)
+var reblog_list_item = function (post) {
+	return $("#" + post.children[0].id + " > .post_wrapper > .post_content > .post_content_inner > .post_container > .reblog-list-item");
+}
+
+//title of a post that has been reblogged
+var rl_reblog_title = function (post) {
+	return $("#" + post.children[0].id + " > .post_wrapper > .post_content > .post_content_inner > .post_container > .reblog-list > .reblog-list-item > .reblog-title");
+}
+
+//content of a post that has been reblogged
+var rl_reblog_content = function (post) {
+	return $("#" + post.children[0].id + " > .post_wrapper > .post_content > .post_content_inner > .post_container > .reblog-list > .reblog-list-item > .reblog-content");
+}
+
+//content of a post that has been reblogged
+var reblog_content = function (post) {
+	return $("#" + post.children[0].id + " > .post_wrapper > .post_content > .post_content_inner > .post_container > .reblog-list-item > .reblog-content");
+}
+
+//body of a photo post
+var photo_post_body = function (post) {
+	return $("#" + post.children[0].id + " > .post_wrapper > .post_content > .post_content_inner > .post_body");
+}
+
+var photo_post_rl_rli = function (post) {
+	return $("#" + post.children[0].id + " > .post_wrapper > .post_content > .post_content_inner >  .reblog-list > .reblog-list-item");
+}
+
+var photo_post_rl_rli_header = function (post) {
+	return $("#" + post.children[0].id + " > .post_wrapper > .post_content > .post_content_inner > .reblog-list > .reblog-list-item > .reblog-header");
+}
+
+var photo_post_rl_rli_content = function (post) {
+	return $("#" + post.children[0].id + " > .post_wrapper > .post_content > .post_content_inner > .reblog-list > .reblog-list-item > .reblog-content");
+}
+
+var photo_post_rli = function (post) {
+	return $("#" + post.children[0].id + " > .post_wrapper > .post_content > .post_content_inner > .reblog-list-item");
+}
+
+var photo_post_rli_header = function (post) {
+	return $("#" + post.children[0].id + " > .post_wrapper > .post_content > .post_content_inner > .reblog-list-item > .reblog-header");
+}
+
+var photo_post_rli_content = function (post) {
+	return $("#" + post.children[0].id + " > .post_wrapper > .post_content > .post_content_inner > .reblog-list-item > .reblog-content");
+}
+
+var note_post_question = function (post) {
+	return $("#" + post.children[0].id + " .post_body > .note_wrapper");
+}
+
+var note_post_answer = function (post) {
+	return $("#" + post.children[0].id + " .post_body > .answer");
+}
+
 var read = function (post, type) {
 	if (read_post_type) {
 		speak(type + " post:");
 	}
 	post_type = type;
 	
-	if ($("#" + post.children[0].id + " > .post_wrapper > .post_header > .post_info") != null && $("#" + post.children[0].id + " > .post_wrapper > .post_header > .post_info") != undefined) {
-		speak($("#" + post.children[0].id + " > .post_wrapper > .post_header > .post_info").textContent);
+	if (post_header(post) != undefined) {
+		speak(post_header(post).textContent);
 	}
-	
+		
 	switch (type) {
 		case "regular":			
-			if ($("#" + post.children[0].id + " > .post_wrapper > .post_content > .post_content_inner > .post_container > .post_title") != undefined) {
-				speak($("#" + post.children[0].id + " > .post_wrapper > .post_content > .post_content_inner > .post_container > .post_title").textContent); 
+			if (post_title(post) != undefined) {
+				speak(post_title(post).textContent); 
 			}
-			if ($("#" + post.children[0].id + " > .post_wrapper > .post_content > .post_content_inner > .post_container > .post_body") != undefined) {
-				speak($("#" + post.children[0].id + " > .post_wrapper > .post_content > .post_content_inner > .post_container > .post_body").textContent); 
+			if (post_body(post) != undefined) {
+				for (var post_body_index = 0; post_body_index < post_body(post).children.length; post_body_index++) {
+					speak(post_body(post).children[post_body_index].textContent); 
+				}
 			}
-			else if ($("#" + post.children[0].id + " > .post_wrapper > .post_content > .post_content_inner > .post_container > .reblog-list > .reblog-list-item") != undefined) {
-				if ($("#" + post.children[0].id + " > .post_wrapper > .post_content > .post_content_inner > .post_container > .reblog-list > .reblog-list-item > .reblog-header")) {
-					speak($("#" + post.children[0].id + " > .post_wrapper > .post_content > .post_content_inner > .post_container > .reblog-list > .reblog-list-item > .reblog-header").textContent);
+			else if (rl_reblog_list_item(post) != undefined) {
+				speak(rl_reblog_header(post).textContent);
+				
+				if (rl_reblog_title(post) != undefined) {
+					speak(rl_reblog_title(post).textContent);
 				}
 				
-				if ($("#" + post.children[0].id + " > .post_wrapper > .post_content > .post_content_inner > .post_container > .reblog-list > .reblog-list-item > .reblog-title") != undefined && $("#" + post.children[0].id + " > .post_wrapper > .post_content > .post_content_inner > .post_container > .reblog-list > .reblog-list-item > .reblog-title") != null) {
-					speak($("#" + post.children[0].id + " > .post_wrapper > .post_content > .post_content_inner > .post_container > .reblog-list > .reblog-list-item > .reblog-title").textContent);
-				}
-				
-				if ($("#" + post.children[0].id + " > .post_wrapper > .post_content > .post_content_inner > .post_container > .reblog-list > .reblog-list-item > .reblog-content")) {
-					for (var reblog_content_index = 0; reblog_content_index < $("#" + post.children[0].id + " > .post_wrapper > .post_content > .post_content_inner > .post_container > .reblog-list > .reblog-list-item > .reblog-content").children.length; reblog_content_index++) {
-						speak($("#" + post.children[0].id + " > .post_wrapper > .post_content > .post_content_inner > .post_container > .reblog-list > .reblog-list-item > .reblog-content").children[reblog_content_index].textContent);
+				if (rl_reblog_content(post) != undefined) {
+					for (var reblog_content_index = 0; reblog_content_index < rl_reblog_content(post).children.length; reblog_content_index++) {
+						speak(rl_reblog_content(post).children[reblog_content_index].textContent);
 					}
 				}
 									
-				var reblog_list_item = $("#" + post.children[0].id + " > .post_wrapper > .post_content > .post_content_inner > .post_container > .reblog-list > .reblog-list-item");
+				var rli = rl_reblog_list_item(post);
 				
-				while (reblog_list_item.nextSibling != null && reblog_list_item.nextSibling != undefined) {
-					reblog_list_item = reblog_list_item.nextSibling;
+				while (rli.nextSibling != undefined) {
+					rli = rli.nextSibling;
 					
-					if (reblog_list_item.children != null && reblog_list_item.children != undefined) {
-						speak(reblog_list_item.children[0].textContent);
-						speak(reblog_list_item.children[1].textContent);
+					if (rli.children != undefined) {
+						speak(rli.children[0].textContent);
+						for (var rli_index = 0; rli_index < rli.children[1].children.length; rli_index++) {
+							speak(rli.children[1].children[rli_index].textContent);
+						}
 					}
 				}
 				
-				if ($("#" + post.children[0].id + " > .post_wrapper > .post_content > .post_content_inner > .post_container > .reblog-list-item") != undefined && $("#" + post.children[0].id + " > .post_wrapper > .post_content > .post_content_inner > .post_container > .reblog-list-item") != null) {
-					if ($("#" + post.children[0].id + " > .post_wrapper > .post_content > .post_content_inner > .post_container > .reblog-list-item > .reblog-header") != null && $("#" + post.children[0].id + " > .post_wrapper > .post_content > .post_content_inner > .post_container > .reblog-list-item > .reblog-header") != undefined) {
-						speak($("#" + post.children[0].id + " > .post_wrapper > .post_content > .post_content_inner > .post_container > .reblog-list-item > .reblog-header").textContent);
+				if (reblog_list_item(post) != undefined) {
+					if (reblog_header(post) != undefined) {
+						speak(reblog_header(post).textContent);
 					}
 					
-					if ($("#" + post.children[0].id + " > .post_wrapper > .post_content > .post_content_inner > .post_container > .reblog-list-item > .reblog-content") != null && $("#" + post.children[0].id + " > .post_wrapper > .post_content > .post_content_inner > .post_container > .reblog-list-item > .reblog-content") != undefined) {
-						speak($("#" + post.children[0].id + " > .post_wrapper > .post_content > .post_content_inner > .post_container > .reblog-list-item > .reblog-content").textContent);
+					if (reblog_content(post) != undefined) {
+						speak(reblog_content(post).textContent);
 					}
 				}
 			}
@@ -124,94 +218,96 @@ var read = function (post, type) {
 		break;
 		
 		case "photo":
-			if ($("#" + post.children[0].id + " > .post_wrapper > .post_content > .post_content_inner > .post_body") != null && $("#" + post.children[0].id + " > .post_wrapper > .post_content > .post_content_inner > .post_body") != undefined) {
-				speak($("#" + post.children[0].id + " > .post_wrapper > .post_content > .post_content_inner > .post_body").textContent);
+			if (photo_post_body(post) != undefined) {
+				speak(photo_post_body(post).textContent);
 			}
 			
-			if ($("#" + post.children[0].id + " > .post_wrapper > .post_content > .post_content_inner >  .reblog-list > .reblog-list-item") != undefined) {
-				if ($("#" + post.children[0].id + " > .post_wrapper > .post_content > .post_content_inner > .reblog-list > .reblog-list-item > .reblog-header")) {
-					speak($("#" + post.children[0].id + " > .post_wrapper > .post_content > .post_content_inner > .reblog-list > .reblog-list-item > .reblog-header").textContent);
+			if (photo_post_rl_rli(post) != undefined) {
+				if (photo_post_rl_rli_header(post) != undefined) {
+					speak(photo_post_rl_rli_header(post).textContent);
 				}
 				
-				if ($("#" + post.children[0].id + " > .post_wrapper > .post_content > .post_content_inner > .reblog-list > .reblog-list-item > .reblog-content")) {
-					speak($("#" + post.children[0].id + " > .post_wrapper > .post_content > .post_content_inner > .reblog-list > .reblog-list-item > .reblog-content").textContent);
+				if (photo_post_rl_rli_content(post) != undefined) {
+					speak(photo_post_rl_rli_content(post).textContent);
 				}
 									
-				var reblog_list_item = $("#" + post.children[0].id + " > .post_wrapper > .post_content > .post_content_inner > .reblog-list > .reblog-list-item");
+				var rli = $("#" + post.children[0].id + " > .post_wrapper > .post_content > .post_content_inner > .reblog-list > .reblog-list-item");
 				
-				while (reblog_list_item.nextSibling != null && reblog_list_item.nextSibling != undefined) {
-					reblog_list_item = reblog_list_item.nextSibling;
+				while (rli.nextSibling != undefined) {
+					rli = rli.nextSibling;
 					
-					if (reblog_list_item.children != null && reblog_list_item.children != undefined) {
-						speak(reblog_list_item.children[0].textContent);
-						speak(reblog_list_item.children[1].textContent);
+					if (rli.children != undefined) {
+						speak(rli.children[0].textContent);
+						speak(rli.children[1].textContent);
 					}
 				}
 				
-				if ($("#" + post.children[0].id + " > .post_wrapper > .post_content > .post_content_inner > .reblog-list-item") != undefined && $("#" + post.children[0].id + " > .post_wrapper > .post_content .post_content_inner > .post_container > .reblog-list-item") != null) {
-					if ($("#" + post.children[0].id + " > .post_wrapper > .post_content > .post_content_inner > .reblog-list-item > .reblog-header") != null && $("#" + post.children[0].id + " > .post_wrapper > .post_content > .post_content_inner > .post_container > .reblog-list-item > .reblog-header") != undefined) {
-						speak($("#" + post.children[0].id + " > .post_wrapper > .post_content > .post_content_inner > .reblog-list-item > .reblog-header").textContent);
+				if (photo_post_rli(post) != undefined) {
+					if (photo_post_rli_header(post) != undefined) {
+						speak(photo_post_rli_header(post).textContent);
 					}
 					
-					if ($("#" + post.children[0].id + " > .post_wrapper > .post_content > .post_content_inner > .reblog-list-item > .reblog-content") != null && $("#" + post.children[0].id + " > .post_wrapper > .post_content > .post_content_inner > .reblog-list-item > .reblog-content") != undefined) {
-						speak($("#" + post.children[0].id + " > .post_wrapper > .post_content > .post_content_inner > .reblog-list-item > .reblog-content").textContent);
+					if (photo_post_rli_content(post) != undefined) {
+						for (var index = 0; index < photo_post_rli_content(post).children.length; index++) {
+							speak(photo_post_rli_content(post).children[index].textContent);
+						}
 					}
 				}
 			}
 		break;
 		
 		case "photoset":
-			if ($("#" + post.children[0].id + " > .post_wrapper > .post_content > .post_content_inner > .post_body") != null && $("#" + post.children[0].id + " > .post_wrapper > .post_content > .post_content_inner > .post_body") != undefined) {
-				speak($("#" + post.children[0].id + " > .post_wrapper > .post_content > .post_content_inner > .post_body").textContent);
+			if (photo_post_body(post) != undefined) {
+				speak(photo_post_body.textContent);
 			}
 			
-			if ($("#" + post.children[0].id + " > .post_wrapper > .post_content > .post_content_inner >  .reblog-list > .reblog-list-item") != undefined) {
-				if ($("#" + post.children[0].id + " > .post_wrapper > .post_content > .post_content_inner > .reblog-list > .reblog-list-item > .reblog-header")) {
-					speak($("#" + post.children[0].id + " > .post_wrapper > .post_content > .post_content_inner > .reblog-list > .reblog-list-item > .reblog-header").textContent);
+			if (photo_post_rl_rli(post) != undefined) {
+				if (photo_post_rl_rli_header(post) != undefined) {
+					speak(photo_post_rl_rli_header(post).textContent);
 				}
 				
-				if ($("#" + post.children[0].id + " > .post_wrapper > .post_content > .post_content_inner > .reblog-list > .reblog-list-item > .reblog-content")) {
-					speak($("#" + post.children[0].id + " > .post_wrapper > .post_content > .post_content_inner > .reblog-list > .reblog-list-item > .reblog-content").textContent);
+				if (photo_post_rl_rli_content(post) != undefined) {
+					speak(photo_post_rl_rli_content(post).textContent);
 				}
 									
-				var reblog_list_item = $("#" + post.children[0].id + " > .post_wrapper > .post_content > .post_content_inner > .reblog-list > .reblog-list-item");
+				var rli = $("#" + post.children[0].id + " > .post_wrapper > .post_content > .post_content_inner > .reblog-list > .reblog-list-item");
 				
-				while (reblog_list_item.nextSibling != null && reblog_list_item.nextSibling != undefined) {
-					reblog_list_item = reblog_list_item.nextSibling;
+				while (rli.nextSibling != undefined) {
+					rli = rli.nextSibling;
 					
-					if (reblog_list_item.children != null && reblog_list_item.children != undefined) {
-						speak(reblog_list_item.children[0].textContent);
-						speak(reblog_list_item.children[1].textContent);
+					if (rli.children != undefined) {
+						speak(rli.children[0].textContent);
+						speak(rli.children[1].textContent);
 					}
 				}
 				
-				if ($("#" + post.children[0].id + " > .post_wrapper > .post_content > .post_content_inner > .reblog-list-item") != undefined && $("#" + post.children[0].id + " > .post_wrapper > .post_content .post_content_inner > .post_container > .reblog-list-item") != null) {
-					if ($("#" + post.children[0].id + " > .post_wrapper > .post_content > .post_content_inner > .reblog-list-item > .reblog-header") != null && $("#" + post.children[0].id + " > .post_wrapper > .post_content > .post_content_inner > .post_container > .reblog-list-item > .reblog-header") != undefined) {
-						speak($("#" + post.children[0].id + " > .post_wrapper > .post_content > .post_content_inner > .reblog-list-item > .reblog-header").textContent);
+				if (photo_post_rli(post) != undefined) {
+					if (photo_post_rli_header(post) != undefined) {
+						speak(photo_post_rli_header(post).textContent);
 					}
 					
-					if ($("#" + post.children[0].id + " > .post_wrapper > .post_content > .post_content_inner > .reblog-list-item > .reblog-content") != null && $("#" + post.children[0].id + " > .post_wrapper > .post_content > .post_content_inner > .reblog-list-item > .reblog-content") != undefined) {
-						speak($("#" + post.children[0].id + " > .post_wrapper > .post_content > .post_content_inner > .reblog-list-item > .reblog-content").textContent);
+					if (photo_post_rli_content(post) != undefined) {
+						speak(photo_post_rli_content(post).textContent);
 					}
 				}
 			}
 		break;
 		
 		case "video":
-			if ($("#" + post.children[0].id + " .post_body") != null && $("#" + post.children[0].id + " .post_body") != undefined) {
-				speak($("#" + post.children[0].id + " .post_body").textContent);
+			if (post_body(post) != undefined) {
+				speak(post_body(post).textContent);
 			}
 		break;
 		
 		case "note":
-			if ($("#" + post.children[0].id + " .post_body") != null && $("#" + post.children[0].id + " .post_body") != undefined) {
-				if ($("#" + post.children[0].id + " .post_body > .note_wrapper") != null && $("#" + post.children[0].id + " .post_body > .note_wrapper") != undefined) {
-					speak($("#" + post.children[0].id + " .post_body > .note_wrapper").textContent);
+			if (post_body(post) != undefined) {
+				if (note_post_question(post) != undefined) {
+					speak(note_post_question(post).textContent);
 				}
 				
-				if ($("#" + post.children[0].id + " .post_body > .answer") != null && $("#" + post.children[0].id + " .post_body > .answer") != undefined) {
+				if (note_post_answer(post) != undefined) {
 					speak("Answer: ");
-					speak($("#" + post.children[0].id + " .post_body > .answer").textContent);
+					speak(note_post_answer(post).textContent);
 				}
 			}
 		break;		
