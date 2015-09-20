@@ -3,6 +3,18 @@ var post_type = undefined;
 var post_content = ""; 
 var read_post_type = true;
 
+var voices = speechSynthesis.getVoices();
+var voice = voices[0]; //default voice
+
+var switchVoice = function (index) {
+	if (index < 0 || index >= voices.length) {
+		console.log ("index invalid");
+	} else {
+		voice = voices[index];
+		console.log (voice.name);
+	}
+}
+
 var toggle_read_post_type = function () {
 	read_post_type = !read_post_type;
 }
@@ -36,6 +48,7 @@ var speak = function (msg) {
 			
 	for (var i = 0; i < msgarr.length; i++) {
 		var speech = new SpeechSynthesisUtterance(msgarr[i]); 
+		speech.voice = voice;
 		speechSynthesis.speak(speech); 
 	}
 	 
