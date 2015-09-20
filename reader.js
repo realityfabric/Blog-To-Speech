@@ -51,12 +51,12 @@ var read = function (post, type) {
 	}
 	post_type = type;
 	
+	if ($("#" + post.children[0].id + " > .post_wrapper > .post_header > .post_info") != null && $("#" + post.children[0].id + " > .post_wrapper > .post_header > .post_info") != undefined) {
+		speak($("#" + post.children[0].id + " > .post_wrapper > .post_header > .post_info").textContent);
+	}
+	
 	switch (type) {
-		case "regular":
-			if ($("#" + post.children[0].id + " > .post_wrapper > .post_header > .post_info") != null && $("#" + post.children[0].id + " > .post_wrapper > .post_header > .post_info") != undefined) {
-				speak($("#" + post.children[0].id + " > .post_wrapper > .post_header > .post_info").textContent);
-			}
-			
+		case "regular":			
 			if ($("#" + post.children[0].id + " > .post_wrapper > .post_content > .post_content_inner > .post_container > .post_title") != undefined) {
 				speak($("#" + post.children[0].id + " > .post_wrapper > .post_content > .post_content_inner > .post_container > .post_title").textContent); 
 			}
@@ -104,10 +104,6 @@ var read = function (post, type) {
 		break;
 		
 		case "photo":
-			if ($("#" + post.children[0].id + " > .post_wrapper > .post_header > .post_info") != null && $("#" + post.children[0].id + " > .post_wrapper > .post_header > .post_info") != undefined) {
-				speak($("#" + post.children[0].id + " > .post_wrapper > .post_header > .post_info").textContent);
-			}
-			
 			if ($("#" + post.children[0].id + " > .post_wrapper > .post_content > .post_content_inner > .post_body") != null && $("#" + post.children[0].id + " > .post_wrapper > .post_content > .post_content_inner > .post_body") != undefined) {
 				speak($("#" + post.children[0].id + " > .post_wrapper > .post_content > .post_content_inner > .post_body").textContent);
 			}
@@ -145,10 +141,6 @@ var read = function (post, type) {
 		break;
 		
 		case "photoset":
-			if ($("#" + post.children[0].id + " > .post_wrapper > .post_header > .post_info") != null && $("#" + post.children[0].id + " > .post_wrapper > .post_header > .post_info") != undefined) {
-				speak($("#" + post.children[0].id + " > .post_wrapper > .post_header > .post_info").textContent);
-			}
-			
 			if ($("#" + post.children[0].id + " > .post_wrapper > .post_content > .post_content_inner > .post_body") != null && $("#" + post.children[0].id + " > .post_wrapper > .post_content > .post_content_inner > .post_body") != undefined) {
 				speak($("#" + post.children[0].id + " > .post_wrapper > .post_content > .post_content_inner > .post_body").textContent);
 			}
