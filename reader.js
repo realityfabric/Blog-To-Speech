@@ -177,6 +177,12 @@ var read = function (post, type) {
 			}
 		break;
 		
+		case "video":
+			if ($("#" + post.children[0].id + " .post_body") != null && $("#" + post.children[0].id + " .post_body") != undefined) {
+				speak($("#" + post.children[0].id + " .post_body").textContent);
+			}
+		break;
+		
 		default:
 			speak(type + " post. Functionality not yet added for this post type.");
 		break;
