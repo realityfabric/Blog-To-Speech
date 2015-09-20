@@ -183,6 +183,18 @@ var read = function (post, type) {
 			}
 		break;
 		
+		case "note":
+			if ($("#" + post.children[0].id + " .post_body") != null && $("#" + post.children[0].id + " .post_body") != undefined) {
+				if ($("#" + post.children[0].id + " .post_body > .note_wrapper") != null && $("#" + post.children[0].id + " .post_body > .note_wrapper") != undefined) {
+					speak($("#" + post.children[0].id + " .post_body > .note_wrapper").textContent);
+				}
+				
+				if ($("#" + post.children[0].id + " .post_body > .answer") != null && $("#" + post.children[0].id + " .post_body > .answer") != undefined) {
+					speak("Answer: ");
+					speak($("#" + post.children[0].id + " .post_body > .answer").textContent);
+				}
+			}
+		
 		default:
 			speak(type + " post. Functionality not yet added for this post type.");
 		break;
