@@ -1,4 +1,5 @@
 var post = $(".post_container");
+var post_type = undefined;
 var post_content = ""; 
 var read_post_type = true;
 
@@ -7,7 +8,10 @@ var toggle_read_post_type = function () {
 }
 
 var speak = function (msg) { 
-	var MAX_LENGTH = 300;
+	/*
+	 * TODO: split paragraphs & sentences into separate utterances to both reduce utterance length (preventing the need to split mid sentence) and also add better timing to posts
+	 */
+	var MAX_LENGTH = 250;
 	var msgarr = [],
 		t_msgarr = [],
 		t_msg = "";
@@ -45,6 +49,8 @@ var read = function (post, type) {
 	if (read_post_type) {
 		speak(type + " post:");
 	}
+	post_type = type;
+	
 	switch (type) {
 		case "regular":
 			if ($("#" + post.children[0].id + " > .post_wrapper > .post_header > .post_info") != null && $("#" + post.children[0].id + " > .post_wrapper > .post_header > .post_info") != undefined) {
@@ -190,6 +196,12 @@ var read = function (post, type) {
 		
 		current_tag = current_tag.nextSibling; 
 	}
+	
+	speak ("End of Post");
+}
+
+var replay = function () {
+	read(post,post_type);
 }
 
 var next = function () { 
@@ -203,7 +215,7 @@ var next = function () {
 	
 	post_content = "";
 	
-	while (holder != "regular" && holder != "photo" && holder != "photoset") { 
+	while (holder != "regular" && holder != "photo" && holder != "photoset" && holder != "note" && holder != "video" && holder != "audio") { 
 	//while (holder != "photoset") {
 		if (post.nextSibling != null || post.nextSibling != undefined) {
             console.log(holder);
