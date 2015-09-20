@@ -26,7 +26,7 @@ var playMedia = function () {
 
 var speak = function (msg) { 
 	/*
-	 * TODO: split paragraphs & sentences into separate utterances to both reduce utterance length (preventing the need to split mid sentence) and also add better timing to posts
+	 * TODO: split sentences into separate utterances to both reduce utterance length (preventing the need to split mid sentence) and also add better timing to posts
 	 */
 	var MAX_LENGTH = 250;
 	var msgarr = [],
@@ -91,7 +91,9 @@ var read = function (post, type) {
 				}
 				
 				if ($("#" + post.children[0].id + " > .post_wrapper > .post_content > .post_content_inner > .post_container > .reblog-list > .reblog-list-item > .reblog-content")) {
-					speak($("#" + post.children[0].id + " > .post_wrapper > .post_content > .post_content_inner > .post_container > .reblog-list > .reblog-list-item > .reblog-content").textContent);
+					for (var reblog_content_index = 0; reblog_content_index < $("#" + post.children[0].id + " > .post_wrapper > .post_content > .post_content_inner > .post_container > .reblog-list > .reblog-list-item > .reblog-content").children.length; reblog_content_index++) {
+						speak($("#" + post.children[0].id + " > .post_wrapper > .post_content > .post_content_inner > .post_container > .reblog-list > .reblog-list-item > .reblog-content").children[reblog_content_index].textContent);
+					}
 				}
 									
 				var reblog_list_item = $("#" + post.children[0].id + " > .post_wrapper > .post_content > .post_content_inner > .post_container > .reblog-list > .reblog-list-item");
@@ -270,7 +272,8 @@ var init = function () {
 init();
 
 //Facebook
-
+/*
 var fbposts = $(".userContentWrapper");
 var fbpost_headers = $(".userContentWrapper ._5pbw");
 var fbpost_content = $(".userContentWrapper .userContent");
+*/
