@@ -12,10 +12,12 @@ var voice = voices[2]; //default voice
 var switchVoice = function (index) {
 	voices = speechSynthesis.getVoices(); //added this because sometimes the initial definition assigns an empty array
 	if (index < 0 || index >= voices.length) {
-		console.log ("index invalid");
+		console.log ("index invalid: continuing to use " + voice.name);
+		speak ("index invalid: continuing to use " + voice.name);
 	} else {
 		voice = voices[index];
-		console.log (voice.name);
+		console.log ("voice switched to " + voice.name);
+		speak("voice switched to " + voice.name);
 	}
 }
 
