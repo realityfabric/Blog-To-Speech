@@ -361,8 +361,9 @@ var next = function () {
 	read (post, holder);
 } 
 
-var init = function () { 
-	next(); 
+var init = function () {
+	if (post != undefined && post.children[0].dataset.type != undefined)
+		read (post, post.children[0].dataset.type);
 } 
 
 init();
