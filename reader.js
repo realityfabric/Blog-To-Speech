@@ -45,9 +45,7 @@ var speak = function (msg) {
 		for (var i = 0; i < t_msgarr.length; i++) { //gotta be a better way to do this
 			if (t_msg.length + t_msgarr[i].length < MAX_LENGTH) {
 				t_msg += t_msgarr[i] + " ";
-			} else {
-				i = t_msgarr.length; //stops loop from going again
-			}
+			} else break;
 		}
 		
 		msgarr.push(t_msg);
