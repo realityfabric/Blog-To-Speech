@@ -7,7 +7,7 @@ var post_content = "";
 var read_post_type = true;
 
 var voices = speechSynthesis.getVoices();
-var voice = voices[0]; //default voice
+var voice = voices[2]; //default voice
 
 var switchVoice = function (index) {
 	voices = speechSynthesis.getVoices(); //added this because sometimes the initial definition assigns an empty array
