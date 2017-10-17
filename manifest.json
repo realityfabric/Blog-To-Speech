@@ -1,0 +1,15 @@
+{
+    "name": "Blog to Speech",
+    "manifest_version": 2,
+    "version": "0.0.42",
+    "description": "Let Chrome read your blog posts to you.",
+    "browser_action": {
+        "default_popup": "popup.html"
+    },
+    "background": {
+        "scripts": ["jquery.min.js"]
+    },
+    "permissions": [
+        "tabs", "http://www.tumblr.com/dashboard", "https://www.tumblr.com/"
+    ]
+}
